@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Vars
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_YELLOW=$ESC_SEQ"33;01m"
+COL_RED=$ESC_SEQ"31;01m"
+COL_GREEN=$ESC_SEQ"32;01m"
+COL_BLUE=$ESC_SEQ"34;01m"
+#COL_MAGENTA=$ESC_SEQ"35;01m"
+#COL_CYAN=$ESC_SEQ"36;01m"
+
+changed_files="$(git diff HEAD~1 --name-only | grep ".*\.rst$")"
+if [[ `git status --porcelain` ]]; then
+    echo -en "$COL_YELLOW Changed files:$COL_RESET\n"
+    echo "$changed_files"
+    #if [[ $changed_files = README.rst ]]; then
+    #    echo -en "$COL_BLUE Running style checks against README.rst ...$COL_RESET\n"
+    #    docker run -it -v `pwd`/README.rst:/srv/data/README.rst testthedocs/ttd-doc8
+    #else
+    #    :
+    #fi
+else
+    echo -en "$COL_GREEN No changes, moving on.$COL_RESET\n"
+    exit 0
+fi
+LATEST_COMMIT=$(git rev-parse HEAD)
+# latest commit where someting in docs was changed
+FOLDER_COMMIT=$(git log -1 --format=format:%H --full-diff docs)
+README_COMMIT=$(git log -1 --format=format:%H --full-diff docs)
+
+if [ $FOLDER_COMMIT = $LATEST_COMMIT ]; then
+    echo -en "$COL_BLUE Running HTML test builds$COL_RESET\n"
+    docker run --rm -v `pwd`/docs:/build/docs:rw testthedocs/ttd-sphinx html
+fi
+if [ $README_COMMIT = $LATEST_COMMIT ]; then
+    echo -en "$COL_BLUE Running style checks against README.rst ...$COL_RESET\n"
+    docker run -it -v `pwd`/README.rst:/srv/data/README.rst testthedocs/ttd-doc8
+fi
