@@ -1,0 +1,13 @@
+session_name: Overwatch
+windows:
+- window_name: info
+  layout: main-vertical
+  panes:
+    - shell_command:
+        - ./info/gitstatus.sh
+    - shell_command:
+        - git quick-stats changelogs
+    - shell_command:
+        - git quick-stats commitsByMonth
+    - shell_command:
+        - git quick-stats branchesByDate

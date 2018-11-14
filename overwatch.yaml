@@ -1,0 +1,15 @@
+session_name: Overwatch
+windows:
+- window_name: info
+  layout: main-vertical
+  options:
+      main-pane-width: 180
+  panes:
+    - shell_command:
+        - /home/svx/Projects/ttd/overwatch/scripts/info/gitstatus.sh
+    - shell_command:
+        - git quick-stats changelogs
+    - shell_command:
+        - git quick-stats commitsByMonth
+    - shell_command:
+        - git quick-stats branchesByDate
