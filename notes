@@ -6,3 +6,8 @@ overwatch:
 
 Tmux:
 - https://github.com/odedlaz/tmux-onedark-theme
+
+
+# Monitoring
+
+docker run -it -p 8080:8080 -v `pwd`:/data xeor/git-stats (from in the git repo)
