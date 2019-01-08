@@ -10,7 +10,7 @@ COL_YELLOW=$ESC_SEQ"33;01m"
 #COL_RED=$ESC_SEQ"31;01m"
 
 
-FILES=*.md
+FILES="*.md"
 for f in $FILES
 do
   # extension="${f##*.}"
