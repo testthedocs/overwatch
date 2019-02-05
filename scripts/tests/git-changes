@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Todo
+# Move grep to use '-s' for silent mode
+# Cleanup
+# Shellcheck
+# Follow script style guide
+
 # Vars
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"
