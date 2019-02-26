@@ -10,7 +10,7 @@ networks:
 
 services:
   prometheus:
-    image: prom/prometheus:v2.0.0
+    image: prom/prometheus:v2.7.1
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -27,7 +27,7 @@ services:
       - back-tier
 
   node-exporter:
-    image: prom/node-exporter
+    image: prom/node-exporter:v0.17.0
     volumes:
       - /proc:/host/proc
       - /sys:/host/sys
@@ -43,7 +43,7 @@ services:
       - back-tier
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:6.0.0
     depends_on:
       - prometheus
     ports:
@@ -55,7 +55,7 @@ services:
     networks:
       - back-tier
       - front-tier
-  
+
   metrics:
      image: infinityworks/docker-hub-exporter
      ports:
