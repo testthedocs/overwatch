@@ -11,3 +11,13 @@ Tmux:
 # Monitoring
 
 docker run -it -p 8080:8080 -v `pwd`:/data xeor/git-stats (from in the git repo)
+
+---
+
+Check only modified files:
+
+https://stackoverflow.com/questions/2412450/git-pre-commit-hook-changed-added-files
+
+https://gist.github.com/svx/139068201a6e51bb9a01b16fdc3773e6
+
+https://superuser.com/questions/552617/execute-git-pre-commit-hook-only-if-files-in-certain-directory-modified
