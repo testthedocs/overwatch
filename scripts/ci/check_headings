@@ -1,0 +1,11 @@
+#!/bin/bash
+if diff toc.md testfile.md >/dev/null 2>&1
+then
+    echo "Files are the same - Great!"
+    exit 0
+else
+    echo "Files are different"
+    icdiff --line-numbers toc.md testfile.md
+    exit 1
+fi
+
