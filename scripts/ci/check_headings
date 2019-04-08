@@ -1,4 +1,26 @@
 #!/bin/bash
+
+# Use frep: https://github.com/subchen/frep
+# With this example:
+# cat config.toml 
+# headings = [
+#   "# One",
+#   "## Two",
+#   "### Three"
+#]
+
+# and this template base.md
+# {{- range .headings }}
+# {{.}}
+# {{- end }}
+
+# Run frep base.md --load config.toml --overwrite
+# and you get:
+# cat base
+# # One
+# ## Two
+# ### Three
+
 if diff toc.md testfile.md >/dev/null 2>&1
 then
     echo "Files are the same - Great!"
