@@ -1,0 +1,14 @@
+Count the white spaces at line endings
+
+Example: cat test-file.md | ag -t -c ' \n' | wc -l
+
+To do:
+
+Write a check with different levels like:
+
+- Error
+- Warning
+- Suggestion
+
+- Define levels for these warnings and let the check pass or fail.
+- Check if vale can already do that.
