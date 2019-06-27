@@ -1,0 +1,17 @@
+language: python
+python:
+  - "2.7"
+env:
+  - DOC_DIR=docs/
+# Check to see if any documentation files (.md, .rst) in the doc
+# directory were added/changed
+script:
+- |
+    if git diff --name-only $TRAVIS_COMMIT_RANGE $DOC_DIR | grep -qE '(\.md$)|(\.rst$)'
+    then
+      echo "There appear to be docs in this commit.  Thank you."
+      exit
+    else
+      echo "This commit doesn't seem to have any docs."
+      exit 1
+    fi
