@@ -1,7 +1,6 @@
 #!/bin/sh
 
-# Get current date
-#TODAY='date +%F'
+
 
 FILES=$(git ls-tree --name-only HEAD .)
 MAXLEN=0
@@ -38,6 +37,13 @@ filename_format="$normal"
 dirname_format="$reset$blue$bold"
 file_numbers_format="$brown"
 
+
+# # zebra definitions and format
+# zebra_on_color=$(tput setab 237)
+# zebra_off_color=$black_bg
+# zebra=$()
+# zebra_on=0
+
 i=1
 
 for f in $FILES; do
@@ -48,8 +54,17 @@ for f in $FILES; do
   #printf "%${space_for_file_numbers}d | " "$i"
   printf " |"
 
+  # # zebra calculation
+  # if [ $zebra_on -eq 1 ]; then
+  #   zebra=$zebra_on_color
+  #   zebra_on=0
+  # else
+  #   zebra=$zebra_off_color
+  #   zebra_on=1
+  # fi
 
-  str=$(git log -1 --pretty=format:"%<(23)%C(green)%ai%C(white) | %C(cyan)%h%C(white) | %<(15)%C(yellow)%cn%C(white) | %s" $f)
+
+  str=$(git log -1 --pretty=format:"%<(23)%C(green)%cr%C(white) | %C(cyan)%h%C(white) | %<(15)%C(yellow)%cn%C(white) | %s" $f)
   if [ -d "$f" ]; then
     printf "$dirname_format"
   else
@@ -67,4 +82,3 @@ for f in $FILES; do
 done
 
 printf "$(tput sgr 0)"
-
