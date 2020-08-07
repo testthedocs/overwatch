@@ -1,0 +1,10 @@
+#/bin/bash
+LAST_MOD=$(date +%Y-%m-%d --date="3 months ago")
+git ls-files -- '*.md' | while read path
+do
+  if [ "$(git log --since \"$LAST_MOD\" -- $path)" == "" ]
+  then
+    #echo "The following files are not modified since $LAST_MOD"
+    echo "$path $(git log -1 --pretty='%h %ad' -- $path)"
+  fi
+done
